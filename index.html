@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Struk SPBU</title>
+    <link rel="icon" href="img/app.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <main id="content-area">
+            <p class="placeholder-text">Pilih jenis BBM dari menu di bawah, lalu tekan tombol '+' untuk membuat struk baru.</p>
+        </main>
+        
+        <button id="fab" class="fab" style="display: none;">+</button>
+        <button id="settings-btn" class="fab fab-settings" style="display: none;">
+            <i class="fas fa-cog"></i>
+        </button>
+        
+        <nav class="bottom-nav">
+            <div class="nav-item" data-menu="pertalite">
+                <i class="fas fa-gas-pump"></i>
+                <span>Pertalite</span>
+            </div>
+            <div class="nav-item" data-menu="biosolar">
+                <i class="fas fa-gas-pump"></i>
+                <span>Bio Solar</span>
+            </div>
+            <div class="nav-item" data-menu="pertamax">
+                <i class="fas fa-gas-pump"></i>
+                <span>Pertamax</span>
+            </div>
+            <div class="nav-item" data-menu="pertamina-dex">
+                <i class="fas fa-gas-pump"></i>
+                <span>Pertamina Dex</span>
+            </div>
+        </nav>
+    </div>
+
+    <div style="display: none;">
+        <div id="form-subsidi-template">
+            <form id="form-subsidi" class="input-form">
+                <h3>Input Data Struk Subsidi</h3>
+                <input type="number" id="shift-subsidi" placeholder="Shift" required>
+                <label for="waktu-subsidi">Waktu Transaksi:</label>
+                <input type="datetime-local" id="waktu-subsidi" required>
+                <input type="text" id="pulau-subsidi" placeholder="Pulau/Pompa" required>
+                <input type="text" id="operator-subsidi" placeholder="Nama Operator" required>
+                <input type="text" id="pembayaran-subsidi" placeholder="Metode Pembayaran" required>
+                <input type="number" id="total-harga-subsidi" placeholder="Jumlah Uang Dibayar (Rp)" required>
+                <input type="text" id="plat-subsidi" placeholder="No. Plat Kendaraan" required>
+
+                <div class="price-group">
+                    <label for="harga-nonsubsidi">Harga Non Subsidi / Liter:</label>
+                    <input type="number" id="harga-nonsubsidi" readonly required>
+                    <label for="subsidi-pemerintah">Subsidi Pemerintah / Liter:</label>
+                    <input type="number" id="subsidi-pemerintah" readonly required>
+                    <label for="harga-jual-display">Harga Jual / Liter:</label>
+                    <input type="number" id="harga-jual-display" readonly required>
+                </div>
+                
+                <div class="volume-option-container">
+                    <span>Opsi Volume:</span>
+                    <label><input type="radio" name="volume_choice_subsidi" value="otomatis" checked> Otomatis</label>
+                    <label><input type="radio" name="volume_choice_subsidi" value="manual"> Manual</label>
+                </div>
+                <div id="manual-volume-container-subsidi" style="display:none;">
+                    <input type="number" step="0.01" id="volume-subsidi-manual" placeholder="Volume (Liter)">
+                </div>
+                
+                <button type="submit">Buat Struk</button>
+            </form>
+        </div>
+
+        <div id="form-nonsubsidi-template">
+            <form id="form-nonsubsidi" class="input-form">
+                <h3>Input Data Struk Non-Subsidi</h3>
+                <input type="number" id="shift-nonsubsidi" placeholder="Shift" required>
+                <label for="waktu-nonsubsidi">Waktu Transaksi:</label>
+                <input type="datetime-local" id="waktu-nonsubsidi" required>
+                <input type="text" id="pulau-nonsubsidi" placeholder="Pulau/Pompa" required>
+                <input type="text" id="operator-nonsubsidi" placeholder="Nama Operator" required>
+                <input type="text" id="pembayaran-nonsubsidi" placeholder="Metode Pembayaran" required>
+                <input type="number" id="total-harga-nonsubsidi" placeholder="Jumlah Uang Dibayar (Rp)" required>
+                <input type="number" id="harga-liter-nonsubsidi" placeholder="Harga / Liter" required>
+                
+                <div class="volume-option-container">
+                    <span>Opsi Volume:</span>
+                    <label><input type="radio" name="volume_choice_nonsubsidi" value="otomatis" checked> Otomatis</label>
+                    <label><input type="radio" name="volume_choice_nonsubsidi" value="manual"> Manual</label>
+                </div>
+                <div id="manual-volume-container-nonsubsidi" style="display:none;">
+                    <input type="number" step="0.01" id="volume-nonsubsidi-manual" placeholder="Volume (Liter)">
+                </div>
+                <button type="submit">Buat Struk</button>
+            </form>
+        </div>
+        
+        <div id="struk-wrapper-template">
+             <div id="struk-result" class="struk-paper"></div>
+            <div class="action-buttons">
+                <button id="save-btn"><i class="fas fa-save"></i> Simpan</button>
+                <button id="print-btn"><i class="fas fa-print"></i> Cetak</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
